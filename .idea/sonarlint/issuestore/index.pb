@@ -34,3 +34,5 @@ k
 ;src/main/kotlin/top/aotm/cosmosdms/MyToolWindowFactory.java,b/d/bd14c89f4d34534b64a0cc592a0bb4060b5cb24d
 >
 cosmos-dms.iml,b/0/b0e71f1203753bae229ed9e00d9c0d68c42da593
+s
+Csrc/main/kotlin/top/aotm/cosmosdms/dao/MyPluginPersistentState.java,e/8/e8710dd2fda410c30f49d8febc58400f6bcbb451

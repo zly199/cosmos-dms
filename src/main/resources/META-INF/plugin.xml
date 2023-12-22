@@ -28,5 +28,10 @@
         <toolWindow id="MyToolWindow"
                     anchor="right"
                     factoryClass="top.aotm.cosmosdms.MyToolWindowFactory"/>
+        <applicationService serviceInterface="top.aotm.cosmosdms.dao.MyPluginPersistentState"
+                            serviceImplementation="top.aotm.cosmosdms.dao.MyPluginPersistentState"/>
     </extensions>
+
+
+
 </idea-plugin>

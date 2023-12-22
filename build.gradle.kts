@@ -44,6 +44,10 @@ tasks {
     publishPlugin {
         token.set(System.getenv("PUBLISH_TOKEN"))
     }
+    processResources{
+        // Choose a strategy: 'exclude' to ignore duplicates, 'include' to allow them, or 'fail' to fail the build on duplicates
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
 }
 
 sourceSets {
