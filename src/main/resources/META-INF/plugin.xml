@@ -25,11 +25,11 @@
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow id="MyToolWindow"
+        <toolWindow id="Databases"
                     anchor="right"
-                    factoryClass="top.aotm.cosmosdms.MyToolWindowFactory"/>
-        <applicationService serviceInterface="top.aotm.cosmosdms.dao.MyPluginPersistentState"
-                            serviceImplementation="top.aotm.cosmosdms.dao.MyPluginPersistentState"/>
+                    factoryClass="top.aotm.cosmosdms.view.window.SideToolWindow"/>
+        <applicationService serviceInterface="top.aotm.cosmosdms.dao.DataClientUrlDao"
+                            serviceImplementation="top.aotm.cosmosdms.dao.DataClientUrlDao"/>
     </extensions>
 
 

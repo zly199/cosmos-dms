@@ -10,11 +10,17 @@ version = "1.0-SNAPSHOT"
 repositories {
     mavenCentral()
 }
+dependencies {
+    implementation("com.github.thunderz99:java-cosmos:0.5.24") {
+        exclude(group = "org.slf4j", module = "slf4j-api")
+    }
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+}
 
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-    version.set("2023.1.5")
+    version.set("2023.3.2")
     type.set("IC") // Target IDE Platform
 
     plugins.set(listOf(/* Plugin Dependencies */))
