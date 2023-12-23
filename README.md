@@ -17,6 +17,7 @@
     - [x] 加载partition key
     - [x] 刷新partition key
     - [x] 异步加载
+  - [ ] 收藏collection(置顶)
 - [ ] 数据查询
 - [ ] 智能提示/补全
 - [ ] TBD..

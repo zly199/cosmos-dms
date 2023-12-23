@@ -119,7 +119,6 @@ public class DatabaseTreeListPanel extends JPanel {
 
                             CosmosContainer container = database.getContainer(collectionName);
                             CosmosContainerProperties collectionProperties = container.read().getProperties();
-                            Thread.sleep(2000);
                             return loadPartion(collectionProperties, container);
                         }
 
