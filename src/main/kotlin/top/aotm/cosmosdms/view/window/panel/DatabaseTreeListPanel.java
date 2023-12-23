@@ -17,9 +17,11 @@ import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import java.awt.*;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author: zenglingyog.zly
@@ -91,7 +93,9 @@ public class DatabaseTreeListPanel extends JPanel {
 
                 CosmosDatabase database = dbClient.getDatabase(cosmosDatabaseProperties.getId());
                 CosmosPagedIterable<CosmosContainerProperties> collections = database.readAllContainers();
-                for (CosmosContainerProperties collectionProperties : collections) {
+                //排一下序
+                List<CosmosContainerProperties> sortedList = collections.stream().sorted(Comparator.comparing(CosmosContainerProperties::getId)).collect(Collectors.toList());
+                for (CosmosContainerProperties collectionProperties : sortedList) {
 
                     DefaultMutableTreeNode collectNode = new DefaultMutableTreeNode(collectionProperties.getId());
                     dbNode.add(collectNode);
