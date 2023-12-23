@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.Set;
 
 @State(
-    name = "com.example.MyPluginPersistentState",
-    storages = {@Storage("MyPluginDatabaseUrls.xml")}
+    name = "top.aotm.cosmosdms.dao.DataClientUrlDao",
+    storages = {@Storage("DataClientUrlDao.xml")}
 )
 public class DataClientUrlDao implements PersistentStateComponent<DataClientUrlDao> {
 

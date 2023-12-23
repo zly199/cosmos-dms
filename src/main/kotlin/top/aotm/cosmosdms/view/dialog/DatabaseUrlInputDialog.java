@@ -24,10 +24,14 @@ public class DatabaseUrlInputDialog extends DialogWrapper {
 
         inputPanel.add(new JLabel("Enter the database name:"));
         databaseNameField = new JBTextField();
+        // 设置默认值 todo delete
+        databaseNameField.setText("test");
         inputPanel.add(databaseNameField);
 
         inputPanel.add(new JLabel("Enter the database URL:"));
         databaseUrlField = new JBTextField();
+        // 设置默认值 todo delete
+        databaseUrlField.setText("AccountEndpoint=https://smartcompany-local-2.documents.azure.com:443/;AccountKey=JbJGebkmDIAhsGuN2B0nnDRaR5ESC4rwO3rUy2fnHaFngQ8JNQkABssTgYk48T3c6PeBcJKRwakiSTjEggsHHw==;");
         inputPanel.add(databaseUrlField);
 
         dialogPanel.add(inputPanel, BorderLayout.CENTER);
