@@ -30,6 +30,16 @@
                     factoryClass="top.aotm.cosmosdms.view.window.SideToolWindow"/>
         <applicationService serviceInterface="top.aotm.cosmosdms.dao.DataClientUrlDao"
                             serviceImplementation="top.aotm.cosmosdms.dao.DataClientUrlDao"/>
+<!--        编辑器-->
+        <fileEditorProvider implementation="top.aotm.cosmosdms.editor.editor.CosmosSqlFileEditorProvider"/>
+        <fileType name="CosmSql"
+                  language="CosmSql"
+                  implementationClass="top.aotm.cosmosdms.editor.type.CosmosSqlType"/>
+
+        <!-- 其他注册 -->
+        <lang.syntaxHighlighterFactory language="CosmSql" implementationClass="top.aotm.cosmosdms.editor.highlighter.CosmosSyntaxHighlighterFactory"/>
+        <completion.contributor language="CosmSql" implementationClass="top.aotm.cosmosdms.editor.contributor.CosmosCompletionContributor"/>
+
     </extensions>
 
 

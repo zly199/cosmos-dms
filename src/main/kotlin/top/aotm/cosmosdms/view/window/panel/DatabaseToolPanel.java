@@ -16,7 +16,7 @@ public class DatabaseToolPanel extends JBPanel{
     DataClientUrlDao dataBaseUrlDao = DataClientUrlDao.singleton;
     CosmosDbOperator cosmosDbOperator = CosmosDbOperator.singleton;
 
-    private DatabaseTreeListPanel myToolWindowContent = new DatabaseTreeListPanel();
+    private DatabaseTreeListPanel myToolWindowContent;
     private JButton myRefreshButton;
     private JButton myNewDatabaseButton;
     private JButton myDeleteDatabaseButton;
@@ -24,6 +24,8 @@ public class DatabaseToolPanel extends JBPanel{
 
     public DatabaseToolPanel(Project project) {
         super(new BorderLayout());
+
+        myToolWindowContent = new DatabaseTreeListPanel(project);
 
         this.add(getButtonPanel(), BorderLayout.NORTH);
         this.add(myToolWindowContent, BorderLayout.CENTER);

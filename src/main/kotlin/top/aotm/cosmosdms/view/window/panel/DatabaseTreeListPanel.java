@@ -8,24 +8,30 @@ import com.azure.cosmos.models.CosmosDatabaseProperties;
 import com.azure.cosmos.models.CosmosQueryRequestOptions;
 import com.azure.cosmos.util.CosmosPagedIterable;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.intellij.openapi.fileEditor.FileEditorManager;
+import com.intellij.openapi.fileTypes.PlainTextFileType;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.testFramework.LightVirtualFile;
 import io.github.thunderz99.cosmos.Cosmos;
 import top.aotm.cosmosdms.dao.DataClientUrlDao;
 import com.intellij.ui.treeStructure.Tree;
+import top.aotm.cosmosdms.editor.type.CosmosSqlType;
 import top.aotm.cosmosdms.service.CosmosDbOperator;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeNode;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -42,11 +48,14 @@ public class DatabaseTreeListPanel extends JPanel {
 
     private CosmosDbOperator dbOperator = CosmosDbOperator.singleton;
 
+    private Project project;
+
     public static final String loading = "     [loading...]";
 
 
-    public DatabaseTreeListPanel() {
+    public DatabaseTreeListPanel(Project project) {
         super(new BorderLayout());
+        this.project = project;
         initializeUI();
     }
 
@@ -67,9 +76,52 @@ public class DatabaseTreeListPanel extends JPanel {
         // 添加树到滚动面板，并将滚动面板添加到当前面板
         JScrollPane scrollPane = new JScrollPane(tree);
         this.add(scrollPane, BorderLayout.CENTER);
+
+        // 添加右键菜单
+        initPopupMenu();
+
         asyncLoadPartition(lastDbNodes);
     }
 
+    private void initPopupMenu() {
+        // 创建弹出菜单
+        JPopupMenu popupMenu = new JPopupMenu();
+        JMenuItem searchItem = new JMenuItem("查询");
+        popupMenu.add(searchItem);
+
+        // 为树添加鼠标监听器
+        tree.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (SwingUtilities.isRightMouseButton(e)) {
+                    popupMenu.show(tree, e.getX(), e.getY());
+                }
+            }
+        });
+
+        // 为“查询”菜单项添加动作监听器
+        searchItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 打开查询窗口
+                openSearchWindow();
+            }
+        });
+    }
+
+    public void openSearchWindow(){
+            // 创建一个面板用于 SQL 输入
+            JPanel panel = new JPanel(new BorderLayout());
+            JTextArea sqlTextArea = new JTextArea();
+            panel.add(new JScrollPane(sqlTextArea), BorderLayout.CENTER);
+
+            // 添加面板到 IDEA 编辑器区域
+            FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);
+
+            VirtualFile sqlVirtualFile = new LightVirtualFile("MyFile.cosmsql", CosmosSqlType.INSTANCE, "select * from c where c._partition in (\"Accounts\")");
+
+            fileEditorManager.openFile(sqlVirtualFile, true);
+
+    }
 
 
     public void refreshUI() {
